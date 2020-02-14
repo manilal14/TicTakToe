@@ -1,7 +1,7 @@
 # player 1 - "X"
-# player 2 - "O" (capital o)
+# player 2 - "O" (capital O)
 
-def display_initial_board(board)
+def display_initial_board
     puts " 1 | 2 | 3 "
     puts " ---------"
     puts " 4 | 5 | 6 "
@@ -20,9 +20,8 @@ end
 def isEmpty?(board, input)
     if board[input-1] == " "
         return true
-    else
-        return false
     end
+    return false
 end
 
 def turnForPlayer(board, player = "X")
@@ -42,46 +41,8 @@ def turnForPlayer(board, player = "X")
         puts "Space already occupied"
         turnForPlayer(board, player)
     end
-
-
-
 end
 
-def turnForPlayerA(board)
-    puts "Turn for Player A"
-    input = gets.chomp.to_i
-
-    while input<=0 || input>9
-        puts "invalid input, enter value between 1 to 9"
-        input = gets.chomp.to_i
-    end
-    
-    if isEmpty?(board,input)
-        board[input-1] = "X"
-        display_board(board)
-    else
-        puts "Space already occupied"
-        turnForPlayerA(board)
-    end
-
-end
-
-def turnForPlayerB(board)
-    puts "Turn for Player B"
-    input = gets.chomp.to_i
-    while input<=0 || input>9
-        puts "invalid input, enter value between 1 to 9"
-        input = gets.chomp.to_i
-    end
-    
-    if isEmpty?(board,input)
-        board[input-1] = "O"
-        display_board(board)
-    else
-        puts "Space already occupied"
-        turnForPlayerB(board)
-    end
-end
 
 def getCount(board)
    count = 0
@@ -112,7 +73,6 @@ def playerWon?(board)
         ( board[2] == "O" && board[5] == "O" && board[8] == "O" ) ||
         ( board[0] == "O" && board[4] == "O" && board[8] == "O" ) ||
         ( board[2] == "O" && board[4] == "O" && board[6] == "O" ) 
-
         return true
     else
         return false
@@ -120,17 +80,15 @@ def playerWon?(board)
 end
 
 def gameEnd?(board)
-
     if getCount(board) == 9
         return true
     end
-    
     return false
 end
 
 def play(board)
 
-    display_initial_board(board)
+    display_initial_board
     puts "Player A = X"
     puts "Player B = O"
 
@@ -140,7 +98,7 @@ def play(board)
             puts "Player A won"
             exit
         elsif gameEnd?(board)
-            puts "tie"
+            puts "tied"
             exit
         end
         turnForPlayer(board,"O")
@@ -148,7 +106,7 @@ def play(board)
             puts "Player B won"
             exit
         elsif gameEnd?(board)
-            puts "tie"
+            puts "tied"
             exit
         end
     end
